@@ -22,8 +22,8 @@
     <meta name="description" content="🤔 什么是 Zabbix？Zabbix 是一款开源的监控软件，用于监控 🌐 网络设备、💻 服务器和应用程序等多种资源的运行状态。它可以通过多种方式发出🔔 警报，帮助运维人员快速定位和解决问题，确保企业的服务运行稳定。Zabbix 支持分布式部署和图形化管理界面，使得它在复杂环境中也能轻松使用。 官网地址：https:&#x2F;&#x2F;www.zabbix.com&#x2F; 🛠️ Zabbix 组件1. Zab">
 <meta property="og:type" content="article">
 <meta property="og:title" content="zabbix学习记录_1">
-<meta property="og:url" content="http://example.com/2024/08/11/zabbix%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-1/index.html">
-<meta property="og:site_name" content="Azu blog">
+<meta property="og:url" content="https://heyazu.github.io/2024/08/11/zabbix%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-1/index.html">
+<meta property="og:site_name" content="HeyAzu">
 <meta property="og:description" content="🤔 什么是 Zabbix？Zabbix 是一款开源的监控软件，用于监控 🌐 网络设备、💻 服务器和应用程序等多种资源的运行状态。它可以通过多种方式发出🔔 警报，帮助运维人员快速定位和解决问题，确保企业的服务运行稳定。Zabbix 支持分布式部署和图形化管理界面，使得它在复杂环境中也能轻松使用。 官网地址：https:&#x2F;&#x2F;www.zabbix.com&#x2F; 🛠️ Zabbix 组件1. Zab">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-08-11T10:34:30.000Z">
@@ -36,7 +36,7 @@
   
   
   
-  <title>zabbix学习记录_1 - Azu blog</title>
+  <title>zabbix学习记录_1 - HeyAzu</title>
 
   <link  rel="stylesheet" href="/css/vendor/bootstrap-4.6.2.min.css" />
 
@@ -74,7 +74,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":"enable","follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"H5pOaZNNUNx7NG9Qlt8wmVwk-gzGzoHsz","app_key":"qJ9vNqoAmOj5dAwXE3hofC29","server_url":"https://h5poaznn.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"heyazu.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":"enable","follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"H5pOaZNNUNx7NG9Qlt8wmVwk-gzGzoHsz","app_key":"qJ9vNqoAmOj5dAwXE3hofC29","server_url":"https://h5poaznn.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -113,7 +113,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Azu&#39;s blog</strong>
+      <strong>HeyAzu</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -382,7 +382,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>zabbix学习记录_1</div>
-      <div>http://example.com/2024/08/11/zabbix学习记录-1/</div>
+      <div>https://heyazu.github.io/2024/08/11/zabbix学习记录-1/</div>
     </div>
     <div class="license-meta">
       

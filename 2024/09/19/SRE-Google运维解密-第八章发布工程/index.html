@@ -22,11 +22,11 @@
     <meta name="description" content="前言考虑到本书的内容较多，从本章节开始将尽量精简地表达每章的核心内容。（毕竟，阅读效率至关重要！😉） 本章详细讲述了 Google 如何通过发布工程来管理软件的发布过程，并介绍了发布工程师在这一过程中所扮演的关键角色。发布工程是 SRE 中非常重要的环节，确保软件能够稳定、快速且可控地从开发环境推向生产环境。🚀 发布工程师的角色 👨‍💻👩‍💻发布工程师在软件生命周期中扮演着至关重要的角">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SRE-Google运维解密-第八章发布工程">
-<meta property="og:url" content="http://example.com/2024/09/19/SRE-Google%E8%BF%90%E7%BB%B4%E8%A7%A3%E5%AF%86-%E7%AC%AC%E5%85%AB%E7%AB%A0%E5%8F%91%E5%B8%83%E5%B7%A5%E7%A8%8B/index.html">
-<meta property="og:site_name" content="Azu blog">
+<meta property="og:url" content="https://heyazu.github.io/2024/09/19/SRE-Google%E8%BF%90%E7%BB%B4%E8%A7%A3%E5%AF%86-%E7%AC%AC%E5%85%AB%E7%AB%A0%E5%8F%91%E5%B8%83%E5%B7%A5%E7%A8%8B/index.html">
+<meta property="og:site_name" content="HeyAzu">
 <meta property="og:description" content="前言考虑到本书的内容较多，从本章节开始将尽量精简地表达每章的核心内容。（毕竟，阅读效率至关重要！😉） 本章详细讲述了 Google 如何通过发布工程来管理软件的发布过程，并介绍了发布工程师在这一过程中所扮演的关键角色。发布工程是 SRE 中非常重要的环节，确保软件能够稳定、快速且可控地从开发环境推向生产环境。🚀 发布工程师的角色 👨‍💻👩‍💻发布工程师在软件生命周期中扮演着至关重要的角">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/img/SRE.png">
+<meta property="og:image" content="https://heyazu.github.io/img/SRE.png">
 <meta property="article:published_time" content="2024-09-19T07:10:22.000Z">
 <meta property="article:modified_time" content="2024-10-12T02:01:54.652Z">
 <meta property="article:author" content="Azu">
@@ -34,11 +34,11 @@
 <meta property="article:tag" content="SRE">
 <meta property="article:tag" content="google">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/img/SRE.png">
+<meta name="twitter:image" content="https://heyazu.github.io/img/SRE.png">
   
   
   
-  <title>SRE-Google运维解密-第八章发布工程 - Azu blog</title>
+  <title>SRE-Google运维解密-第八章发布工程 - HeyAzu</title>
 
   <link  rel="stylesheet" href="/css/vendor/bootstrap-4.6.2.min.css" />
 
@@ -76,7 +76,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":"enable","follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"H5pOaZNNUNx7NG9Qlt8wmVwk-gzGzoHsz","app_key":"qJ9vNqoAmOj5dAwXE3hofC29","server_url":"https://h5poaznn.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"heyazu.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":"enable","follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"H5pOaZNNUNx7NG9Qlt8wmVwk-gzGzoHsz","app_key":"qJ9vNqoAmOj5dAwXE3hofC29","server_url":"https://h5poaznn.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -115,7 +115,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Azu&#39;s blog</strong>
+      <strong>HeyAzu</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -373,7 +373,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>SRE-Google运维解密-第八章发布工程</div>
-      <div>http://example.com/2024/09/19/SRE-Google运维解密-第八章发布工程/</div>
+      <div>https://heyazu.github.io/2024/09/19/SRE-Google运维解密-第八章发布工程/</div>
     </div>
     <div class="license-meta">
       

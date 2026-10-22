@@ -1,6 +1,6 @@
 
 > **概览**：
-> Azu 的个人博客（smartazu.github.io）是一个基于 [Hexo](https://hexo.io/) 的技术分享平台，主要聚焦于 SRE 运维、云计算与 Docker 等领域；主题采用 Material Design 风格的 [Hexo Theme Fluid](https://www.npmjs.com/package/hexo-theme-fluid)，并通过 GitHub Pages 自动部署，支持本地搜索与多语言等功能。
+> Azu 的个人博客（heyazu.github.io）是一个基于 [Hexo](https://hexo.io/) 的技术分享平台，主要聚焦于 SRE 运维、云计算与 Docker 等领域；主题采用 Material Design 风格的 [Hexo Theme Fluid](https://www.npmjs.com/package/hexo-theme-fluid)，并通过 GitHub Pages 自动部署，支持本地搜索与多语言等功能。
 
 ---
 
@@ -24,9 +24,9 @@
 
 ## 项目简介
 
-Azu 的博客以「分享运维实践与学习笔记」为核心，当前主要系列包括 “SRE-Google 运维解密” 和 “Docker 学习记录” 等，每篇文章均有完整的前言、正文和标签分类，引导读者深入理解运维场景与技术细节。 ([smartazu.github.io][1], [smartazu.github.io][2])
+Azu 的博客以「分享运维实践与学习笔记」为核心，当前主要系列包括 “SRE-Google 运维解密” 和 “Docker 学习记录” 等，每篇文章均有完整的前言、正文和标签分类，引导读者深入理解运维场景与技术细节。 ([heyazu.github.io][1], [heyazu.github.io][2])
 
-在 “关于” 页面中，Azu 自我介绍为“一个普通的人”，并提供了 GitHub 链接和二维码，简洁而富有人情味。 ([smartazu.github.io][3])
+在 “关于” 页面中，Azu 自我介绍为“一个普通的人”，并提供了 GitHub 链接和二维码，简洁而富有人情味。 ([heyazu.github.io][3])
 
 ---
 
@@ -34,9 +34,9 @@ Azu 的博客以「分享运维实践与学习笔记」为核心，当前主要�
 
 ### 内容组织
 
-* **系列化文章**：按专题（如 SRE、云计算、IT支持、网络运维）分类，每个分类下展示对应文章列表，方便系统学习。 ([smartazu.github.io][2])
-* **标签云**：支持多维度标签（如 `Docker`、`SRE`、`Google`、`zabbix` 等），帮助读者快速定位感兴趣内容。 ([smartazu.github.io][4])
-* **归档检索**：按时间倒序排列历史文章，可通过关键字快速搜索。 ([smartazu.github.io][1])
+* **系列化文章**：按专题（如 SRE、云计算、IT支持、网络运维）分类，每个分类下展示对应文章列表，方便系统学习。 ([heyazu.github.io][2])
+* **标签云**：支持多维度标签（如 `Docker`、`SRE`、`Google`、`zabbix` 等），帮助读者快速定位感兴趣内容。 ([heyazu.github.io][4])
+* **归档检索**：按时间倒序排列历史文章，可通过关键字快速搜索。 ([heyazu.github.io][1])
 
 ### 技术栈与主题
 
@@ -69,8 +69,8 @@ Azu 的博客以「分享运维实践与学习笔记」为核心，当前主要�
 1. 克隆仓库：
 
    ```bash
-   git clone https://github.com/SmartAzu/smartazu.github.io.git
-   cd smartazu.github.io
+   git clone https://github.com/HeyAzu/heyazu.github.io.git
+   cd heyazu.github.io
    ```
 2. 安装依赖：
 
@@ -126,8 +126,8 @@ Azu 的博客以「分享运维实践与学习笔记」为核心，当前主要�
 
 ## 联系方式
 
-* 博客主页：[https://smartazu.github.io/](https://smartazu.github.io/)
-* GitHub 仓库：[SmartAzu/smartazu.github.io](https://github.com/SmartAzu/smartazu.github.io)
+* 博客主页：[https://heyazu.github.io/](https://heyazu.github.io/)
+* GitHub 仓库：[HeyAzu/heyazu.github.io](https://github.com/HeyAzu/heyazu.github.io)
 * 作者：Azu（阿祖）
 
 

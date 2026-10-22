@@ -22,11 +22,11 @@
     <meta name="description" content="前言📖on-call是一种工作安排，指工程师在特定时间段内负责随时待命，以应对系统的突发事件或紧急情况。on-call工程师的职责是确保系统的高可用性，及时处理系统警报，进行故障排查和修复，以最小化服务中断的影响。 on-call 工作的日常📅on-call工程师需要24&#x2F;7响应系统警报，保障系统的持续可靠性。主要任务包括：实时监控、故障排查、问题修复、和事后总结。 平衡工作量数量平">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SRE-Google运维解密-第十一章on-call轮值">
-<meta property="og:url" content="http://example.com/2024/10/14/SRE-Google%E8%BF%90%E7%BB%B4%E8%A7%A3%E5%AF%86-%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0on-call%E8%BD%AE%E5%80%BC/index.html">
-<meta property="og:site_name" content="Azu blog">
+<meta property="og:url" content="https://heyazu.github.io/2024/10/14/SRE-Google%E8%BF%90%E7%BB%B4%E8%A7%A3%E5%AF%86-%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0on-call%E8%BD%AE%E5%80%BC/index.html">
+<meta property="og:site_name" content="HeyAzu">
 <meta property="og:description" content="前言📖on-call是一种工作安排，指工程师在特定时间段内负责随时待命，以应对系统的突发事件或紧急情况。on-call工程师的职责是确保系统的高可用性，及时处理系统警报，进行故障排查和修复，以最小化服务中断的影响。 on-call 工作的日常📅on-call工程师需要24&#x2F;7响应系统警报，保障系统的持续可靠性。主要任务包括：实时监控、故障排查、问题修复、和事后总结。 平衡工作量数量平">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/img/SRE.png">
+<meta property="og:image" content="https://heyazu.github.io/img/SRE.png">
 <meta property="article:published_time" content="2024-10-14T03:00:58.000Z">
 <meta property="article:modified_time" content="2024-10-16T07:17:11.277Z">
 <meta property="article:author" content="Azu">
@@ -34,11 +34,11 @@
 <meta property="article:tag" content="SRE">
 <meta property="article:tag" content="google">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/img/SRE.png">
+<meta name="twitter:image" content="https://heyazu.github.io/img/SRE.png">
   
   
   
-  <title>SRE-Google运维解密-第十一章on-call轮值 - Azu blog</title>
+  <title>SRE-Google运维解密-第十一章on-call轮值 - HeyAzu</title>
 
   <link  rel="stylesheet" href="/css/vendor/bootstrap-4.6.2.min.css" />
 
@@ -76,7 +76,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":"enable","follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"H5pOaZNNUNx7NG9Qlt8wmVwk-gzGzoHsz","app_key":"qJ9vNqoAmOj5dAwXE3hofC29","server_url":"https://h5poaznn.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"heyazu.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":"enable","follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"H5pOaZNNUNx7NG9Qlt8wmVwk-gzGzoHsz","app_key":"qJ9vNqoAmOj5dAwXE3hofC29","server_url":"https://h5poaznn.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -115,7 +115,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Azu&#39;s blog</strong>
+      <strong>HeyAzu</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -359,7 +359,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>SRE-Google运维解密-第十一章on-call轮值</div>
-      <div>http://example.com/2024/10/14/SRE-Google运维解密-第十一章on-call轮值/</div>
+      <div>https://heyazu.github.io/2024/10/14/SRE-Google运维解密-第十一章on-call轮值/</div>
     </div>
     <div class="license-meta">
       
