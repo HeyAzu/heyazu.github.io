@@ -1,6 +1,47 @@
 /* global CONFIG */
 
 (function() {
+  function decodeEntities(value) {
+    return value.replace(/&(?:amp|lt|gt|quot|apos|nbsp|#\d+|#x[\da-f]+);/gi, function(entity) {
+      var names = { '&amp;': '&', '&lt;': '<', '&gt;': '>', '&quot;': '"', '&apos;': "'", '&nbsp;': ' ' };
+      if (names[entity.toLowerCase()]) { return names[entity.toLowerCase()]; }
+      var hex = /^&#x/i.test(entity);
+      var code = parseInt(entity.slice(hex ? 3 : 2, -1), hex ? 16 : 10);
+      return code > 0 && code <= 0x10ffff ? String.fromCodePoint(code) : entity;
+    });
+  }
+
+  function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, function(character) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character];
+    });
+  }
+
+  function safeURL(value) {
+    try {
+      var url = new URL(value, window.location.href);
+      return /^https?:$/.test(url.protocol) ? escapeHTML(url.href) : null;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function highlightKeywords(text, keywords) {
+    var escaped = keywords.map(function(keyword) {
+      return keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    });
+    var pattern = new RegExp(escaped.join('|'), 'gi');
+    var result = '';
+    var cursor = 0;
+    text.replace(pattern, function(match, offset) {
+      result += escapeHTML(text.slice(cursor, offset));
+      result += '<span class="search-word">' + escapeHTML(match) + '</span>';
+      cursor = offset + match.length;
+      return match;
+    });
+    return result + escapeHTML(text.slice(cursor));
+  }
+
   // Modified from [hexo-generator-search](https://github.com/wzpan/hexo-generator-search)
   function localSearchFunc(path, searchSelector, resultSelector) {
     'use strict';
@@ -43,7 +84,7 @@
           // 0x03. parse query to keywords list
           var content = $input.val();
           var resultHTML = '';
-          var keywords = content.trim().toLowerCase().split(/[\s-]+/);
+          var keywords = content.trim().toLowerCase().split(/\s+/);
           $result.html('');
           if (content.trim().length <= 0) {
             return $input.removeClass('invalid').removeClass('valid');
@@ -54,11 +95,12 @@
             if (!data.title || data.title.trim() === '') {
               data.title = 'Untitled';
             }
-            var orig_data_title = data.title.trim();
+            var orig_data_title = decodeEntities(data.title.trim());
             var data_title = orig_data_title.toLowerCase();
-            var orig_data_content = data.content.trim().replace(/<[^>]+>/g, '');
+            var orig_data_content = decodeEntities(data.content.trim().replace(/<[^>]+>/g, ''));
             var data_content = orig_data_content.toLowerCase();
-            var data_url = data.url;
+            var data_url = safeURL(data.url);
+            if (!data_url) { return; }
             var index_title = -1;
             var index_content = -1;
             var first_occur = -1;
@@ -84,7 +126,7 @@
             }
             // 0x05. show search results
             if (isMatch) {
-              resultHTML += '<a href=\'' + data_url + '\' class=\'list-group-item list-group-item-action font-weight-bolder search-list-title\'>' + orig_data_title + '</a>';
+              resultHTML += '<a href=\'' + data_url + '\' class=\'list-group-item list-group-item-action font-weight-bolder search-list-title\'>' + escapeHTML(orig_data_title) + '</a>';
               var content = orig_data_content;
               if (first_occur >= 0) {
                 // cut out 100 characters
@@ -105,11 +147,8 @@
 
                 var match_content = content.substring(start, end);
 
-                // highlight all keywords
-                keywords.forEach(function(keyword) {
-                  var regS = new RegExp(keyword, 'gi');
-                  match_content = match_content.replace(regS, '<span class="search-word">' + keyword + '</span>');
-                });
+                // Treat keywords as literal text and escape source text before rendering.
+                match_content = highlightKeywords(match_content, keywords);
 
                 resultHTML += '<p class=\'search-list-content\'>' + match_content + '...</p>';
               }
@@ -157,3 +196,4 @@
     localSearchReset(searchSelector, resultSelector);
   });
 })();
+
